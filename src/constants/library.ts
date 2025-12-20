@@ -179,6 +179,7 @@ export const MOVIES: readonly Movie[] = [
 	{ title: "Dune", year: 2021, status: "watched", rating: 4 },
 	{ title: "Dune: Part Two", year: 2024, status: "watched", rating: 4 },
 	{ title: "A House of Dynamite", year: 2025, status: "watched", rating: 5 },
+	{ title: "Narcos", year: 2015, status: "watching" },
 ] as const;
 
 export const BOOKS: readonly Book[] = [
@@ -286,4 +287,9 @@ export const BOOKS: readonly Book[] = [
 		rating: 4,
 	},
 	{ title: "Why We Buy", author: "Paco Underhill", status: "read", rating: 4 },
+	{ title: "Brave New World", author: "Aldous Huxley", status: "to-read" },
+	{ title: "Neuromancer", author: "William Gibson", status: "to-read" },
+	{ title: "Jennifer Government", author: "Max Barry", status: "to-read" },
+	{ title: "Blindness", author: "José Saramago", status: "to-read" },
+	{ title: "Everyone in Silico", author: "Jim Munroe", status: "to-read" },
 ] as const;
