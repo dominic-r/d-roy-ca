@@ -292,4 +292,16 @@ export const BOOKS: readonly Book[] = [
 	{ title: "Jennifer Government", author: "Max Barry", status: "to-read" },
 	{ title: "Blindness", author: "José Saramago", status: "to-read" },
 	{ title: "Everyone in Silico", author: "Jim Munroe", status: "to-read" },
+	{ title: "Animal Farm", author: "George Orwell", status: "to-read" },
+	{
+		title: "Down and Out in Paris and London",
+		author: "George Orwell",
+		status: "to-read",
+	},
+	{
+		title: "The Road to Wigan Pier",
+		author: "George Orwell",
+		status: "to-read",
+	},
+	{ title: "Fahrenheit 451", author: "Ray Bradbury", status: "to-read" },
 ] as const;
