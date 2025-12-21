@@ -484,18 +484,6 @@ a {
 	letter-spacing: -1px;
 }
 
-.favorite-badge {
-	display: inline-block;
-	margin-left: $spacing-xs;
-	padding: 0.2rem $spacing-xs;
-	font-size: 0.7rem;
-	border-radius: $radius-sm;
-	font-weight: 500;
-	background: rgba(239, 68, 68, 0.15);
-	color: #ef4444;
-	border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
 .status-badge {
 	display: inline-block;
 	padding: 0.2rem $spacing-xs;

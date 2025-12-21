@@ -56,11 +56,6 @@ export class LibraryPage extends BaseComponent {
 		return html`<span class="status-badge status-${status}">${labels[status]}</span>`;
 	}
 
-	private renderFavoriteBadge(favorite?: boolean) {
-		if (!favorite) return "";
-		return html`<span class="favorite-badge">favorite</span>`;
-	}
-
 	private sortByRatingDesc<T extends { rating?: number }>(items: readonly T[]) {
 		return [...items].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
 	}
@@ -88,7 +83,6 @@ export class LibraryPage extends BaseComponent {
 								<div class="media-info">
 									<span class="media-title">${movie.title}</span>
 									${movie.year ? html`<span class="media-year">(${movie.year})</span>` : ""}
-									${this.renderFavoriteBadge(movie.favorite)}
 								</div>
 								<div class="media-meta">
 									${this.renderRating(movie.rating)}
@@ -137,7 +131,6 @@ export class LibraryPage extends BaseComponent {
 								<div class="media-info">
 									<span class="media-title">${book.title}</span>
 									<span class="media-author">by ${book.author}</span>
-									${this.renderFavoriteBadge(book.favorite)}
 								</div>
 								<div class="media-meta">
 									${this.renderRating(book.rating)}

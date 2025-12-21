@@ -5,7 +5,6 @@ export interface Movie {
 	year?: number;
 	status: MediaStatus;
 	rating?: number;
-	favorite?: boolean;
 }
 
 export interface Book {
@@ -13,17 +12,10 @@ export interface Book {
 	author: string;
 	status: "read" | "reading" | "to-read";
 	rating?: number;
-	favorite?: boolean;
 }
 
 export const MOVIES: readonly Movie[] = [
-	{
-		title: "Inglourious Basterds",
-		year: 2009,
-		status: "watched",
-		rating: 5,
-		favorite: true,
-	},
+	{ title: "Inglourious Basterds", year: 2009, status: "watched", rating: 5 },
 	{ title: "Pulp Fiction", year: 1994, status: "watched", rating: 5 },
 	{ title: "Django Unchained", year: 2012, status: "watched", rating: 5 },
 	{ title: "Mr. & Mrs. Smith", year: 2005, status: "watched", rating: 5 },
@@ -100,6 +92,33 @@ export const MOVIES: readonly Movie[] = [
 	{ title: "John Wick: Chapter 4", year: 2023, status: "watched", rating: 4 },
 	{ title: "The Killer", year: 2023, status: "watched", rating: 4 },
 	{ title: "Sicario", year: 2015, status: "watchlist" },
+	{ title: "Zero Dark Thirty", year: 2012, status: "watchlist" },
+	{ title: "A Bronx Tale", year: 1993, status: "watchlist" },
+	{ title: "The Hunger Games", year: 2012, status: "watched", rating: 5 },
+	{
+		title: "The Hunger Games: Catching Fire",
+		year: 2013,
+		status: "watched",
+		rating: 5,
+	},
+	{
+		title: "The Hunger Games: Mockingjay - Part 1",
+		year: 2014,
+		status: "watched",
+		rating: 4,
+	},
+	{
+		title: "The Hunger Games: Mockingjay - Part 2",
+		year: 2015,
+		status: "watched",
+		rating: 4,
+	},
+	{
+		title: "The Hunger Games: The Ballad of Songbirds & Snakes",
+		year: 2023,
+		status: "watched",
+		rating: 5,
+	},
 	{ title: "The Social Network", year: 2010, status: "watched", rating: 4 },
 	{ title: "The Da Vinci Code", year: 2006, status: "watched", rating: 4 },
 	{ title: "Ocean's Eleven", year: 2001, status: "watched", rating: 5 },
@@ -198,7 +217,12 @@ export const BOOKS: readonly Book[] = [
 		status: "read",
 		rating: 5,
 	},
-	{ title: "The Midnight Library", author: "Matt Haig", status: "read" },
+	{
+		title: "The Midnight Library",
+		author: "Matt Haig",
+		status: "read",
+		rating: 4,
+	},
 	{
 		title: "Murder on the Orient Express",
 		author: "Agatha Christie",
@@ -265,7 +289,7 @@ export const BOOKS: readonly Book[] = [
 		status: "read",
 		rating: 4,
 	},
-	{ title: "The Hobbit", author: "J.R.R. Tolkien", status: "read", rating: 3 },
+	{ title: "The Hobbit", author: "J.R.R. Tolkien", status: "read", rating: 2 },
 	{
 		title: "La Planète des singes",
 		author: "Pierre Boulle",
