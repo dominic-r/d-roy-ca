@@ -4,11 +4,36 @@ import { html } from "lit";
 export const BASE_PATH = "/pub/site";
 
 const ROUTE_CONFIG = [
-	{ key: "HOME", path: "/", label: "Home", render: () => html`<landing-page></landing-page>` },
-	{ key: "ABOUT", path: "/about", label: "About", render: () => html`<about-page></about-page>` },
-	{ key: "PROJECTS", path: "/projects", label: "Projects", render: () => html`<projects-page></projects-page>` },
-	{ key: "AUTHENTIK", path: "/authentik", label: "authentik", render: () => html`<authentik-page></authentik-page>` },
-	{ key: "LIBRARY", path: "/library", label: "Library", render: () => html`<library-page></library-page>` },
+	{
+		key: "HOME",
+		path: "/",
+		label: "Home",
+		render: () => html`<landing-page></landing-page>`,
+	},
+	{
+		key: "ABOUT",
+		path: "/about",
+		label: "About",
+		render: () => html`<about-page></about-page>`,
+	},
+	{
+		key: "PROJECTS",
+		path: "/projects",
+		label: "Projects",
+		render: () => html`<projects-page></projects-page>`,
+	},
+	{
+		key: "AUTHENTIK",
+		path: "/authentik",
+		label: "authentik",
+		render: () => html`<authentik-page></authentik-page>`,
+	},
+	{
+		key: "LIBRARY",
+		path: "/library",
+		label: "Library",
+		render: () => html`<library-page></library-page>`,
+	},
 ] as const;
 
 export const ROUTES = Object.fromEntries(
