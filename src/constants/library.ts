@@ -329,4 +329,5 @@ export const BOOKS: readonly Book[] = [
 		status: "to-read",
 	},
 	{ title: "Fahrenheit 451", author: "Ray Bradbury", status: "to-read" },
+	{ title: "On Bullshit", author: "Harry G. Frankfurt", status: "to-read" },
 ] as const;
