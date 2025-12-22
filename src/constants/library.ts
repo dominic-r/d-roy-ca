@@ -92,6 +92,7 @@ export const MOVIES: readonly Movie[] = [
 	{ title: "John Wick: Chapter 4", year: 2023, status: "watched", rating: 4 },
 	{ title: "The Killer", year: 2023, status: "watched", rating: 4 },
 	{ title: "Sicario", year: 2015, status: "watchlist" },
+	{ title: "Sicario: Day of the Soldado", year: 2018, status: "watchlist" },
 	{ title: "Zero Dark Thirty", year: 2012, status: "watchlist" },
 	{ title: "A Bronx Tale", year: 1993, status: "watchlist" },
 	{ title: "The Hunger Games", year: 2012, status: "watched", rating: 5 },
