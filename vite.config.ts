@@ -11,10 +11,15 @@ export default defineConfig({
 	build: {
 		outDir: "dist/pub/site",
 		target: "ES2022",
+		modulePreload: {
+			polyfill: false,
+		},
 		rollupOptions: {
 			output: {
-				manualChunks: {
-					lit: ["lit", "@lit-labs/router"],
+				manualChunks(id) {
+					if (id.includes("@bufbuild/protobuf")) return "protobuf";
+					if (id.includes("lit") || id.includes("@lit-labs")) return "lit";
+					if (id.includes("constants/library")) return "library-data";
 				},
 			},
 		},
@@ -22,6 +27,7 @@ export default defineConfig({
 	css: {
 		preprocessorOptions: {
 			scss: {
+				// @ts-expect-error - modern sass api
 				api: "modern-compiler",
 			},
 		},

@@ -1,38 +1,18 @@
 // Colors
-$bg-primary: #0a0a0a;
-$bg-secondary: #1a1a1a;
-$text-primary: #e5e5e5;
-$text-secondary: #a3a3a3;
-$accent: #60a5fa;
-$accent-hover: #3b82f6;
-$border-color: rgba(163, 163, 163, 0.2);
-$border-color-hover: rgba(163, 163, 163, 0.4);
+$bg: #0a0a0a;
+$text: #e5e5e5;
+$text-dim: #888;
+$accent: #6af;
+$border: #333;
 
 // Typography
-$font-mono:
+$font:
 	"JetBrains Mono",
 	"Fira Code",
-	"SF Mono",
-	"Menlo",
-	"Monaco",
-	"Courier New",
 	monospace;
 
 // Spacing
-$spacing-xs: 0.5rem;
-$spacing-sm: 1rem;
-$spacing-md: 1.5rem;
-$spacing-lg: 2rem;
-$spacing-xl: 3rem;
+$gap: 1rem;
 
-// Transitions
-$duration-fast: 0.2s;
-$duration-normal: 0.3s;
-
-// Breakpoints
-$breakpoint-md: 768px;
-
-// Border radius
-$radius-sm: 4px;
-$radius-md: 6px;
-$radius-lg: 8px;
+// Breakpoint
+$mobile: 600px;

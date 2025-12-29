@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { customElement, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 import { so } from "#app";
 import { BaseComponent } from "#components/base";
 import {
@@ -10,197 +11,211 @@ import {
 	type Movie,
 } from "#constants/library";
 
+type MediaType = "movies" | "books";
+type FilterType = "all" | MediaStatus | "read" | "reading" | "to-read";
+
 @customElement("library-page")
 export class LibraryPage extends BaseComponent {
 	@state()
-	private moviesExpanded = false;
+	private searchQuery = "";
 
 	@state()
-	private booksExpanded = false;
+	private activeTab: MediaType = "movies";
 
-	private readonly toggleMoviesExpanded = () => {
-		this.moviesExpanded = !this.moviesExpanded;
-		so.click({
-			button: "movies-expand",
-			expanded: String(this.moviesExpanded),
-		});
-	};
+	@state()
+	private movieFilter: FilterType = "all";
 
-	private readonly toggleBooksExpanded = () => {
-		this.booksExpanded = !this.booksExpanded;
-		so.click({ button: "books-expand", expanded: String(this.booksExpanded) });
-	};
+	@state()
+	private bookFilter: FilterType = "all";
 
-	private readonly movies: readonly Movie[] = MOVIES;
-
-	private readonly books: readonly Book[] = BOOKS;
-
-	private readonly COLLAPSED_LIMIT = 10;
-
-	private renderRating(rating?: number) {
-		if (!rating) return "";
-		return html`<span class="rating">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span>`;
+	private handleSearch(e: Event) {
+		const input = e.target as HTMLInputElement;
+		this.searchQuery = input.value.toLowerCase();
+		if (this.searchQuery) {
+			so.search({ query: this.searchQuery, tab: this.activeTab });
+		}
 	}
 
-	private renderStatusBadge(
-		status: MediaStatus | "read" | "reading" | "to-read",
-	) {
-		const labels: Record<string, string> = {
-			watched: "watched",
-			watching: "watching",
-			watchlist: "want to watch",
-			read: "read",
-			reading: "reading",
-			"to-read": "want to read",
-		};
-		return html`<span class="status-badge status-${status}">${labels[status]}</span>`;
+	private setTab(tab: MediaType) {
+		this.activeTab = tab;
+		so.click({ button: "library-tab", tab });
+	}
+
+	private setMovieFilter(filter: FilterType) {
+		this.movieFilter = filter;
+		so.click({ button: "movie-filter", filter });
+	}
+
+	private setBookFilter(filter: FilterType) {
+		this.bookFilter = filter;
+		so.click({ button: "book-filter", filter });
+	}
+
+	private filterItems<T extends { title: string; status: string }>(
+		items: readonly T[],
+		filter: FilterType,
+	): T[] {
+		const filtered =
+			filter === "all"
+				? [...items]
+				: items.filter((item) => item.status === filter);
+
+		if (!this.searchQuery) return filtered;
+
+		return filtered.filter((item) =>
+			item.title.toLowerCase().includes(this.searchQuery),
+		);
 	}
 
 	private sortByRatingDesc<T extends { rating?: number }>(items: readonly T[]) {
 		return [...items].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
 	}
 
-	private renderMovieSection(
-		title: string,
-		movies: readonly Movie[],
-		isCollapsible: boolean,
-	) {
-		if (movies.length === 0) return "";
-		const sortedMovies = this.sortByRatingDesc(movies);
-		const displayMovies =
-			isCollapsible && !this.moviesExpanded
-				? sortedMovies.slice(0, this.COLLAPSED_LIMIT)
-				: sortedMovies;
-		const hasMore = isCollapsible && sortedMovies.length > this.COLLAPSED_LIMIT;
+	private renderRating(rating?: number) {
+		if (!rating) return "";
+		return html`<span class="rating">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span>`;
+	}
+
+	private renderStatus(status: string) {
+		const labels: Record<string, string> = {
+			watched: "watched",
+			watching: "watching",
+			watchlist: "watchlist",
+			read: "read",
+			reading: "reading",
+			"to-read": "to-read",
+		};
+		return html`<span class="status ${status}">${labels[status]}</span>`;
+	}
+
+	private renderStats() {
+		const isMovies = this.activeTab === "movies";
+		const filter = isMovies ? this.movieFilter : this.bookFilter;
+		const filtered = isMovies
+			? this.filterItems(MOVIES, filter)
+			: this.filterItems(BOOKS, filter);
+
+		return html`<div class="stats">${filtered.length} items</div>`;
+	}
+
+	private renderFilters() {
+		const isMovies = this.activeTab === "movies";
+		const currentFilter = isMovies ? this.movieFilter : this.bookFilter;
+		const setFilter = isMovies
+			? this.setMovieFilter.bind(this)
+			: this.setBookFilter.bind(this);
+
+		const filters: { label: string; value: FilterType }[] = isMovies
+			? [
+					{ label: "All", value: "all" },
+					{ label: "Watched", value: "watched" },
+					{ label: "Watching", value: "watching" },
+					{ label: "Watchlist", value: "watchlist" },
+				]
+			: [
+					{ label: "All", value: "all" },
+					{ label: "Read", value: "read" },
+					{ label: "Reading", value: "reading" },
+					{ label: "To Read", value: "to-read" },
+				];
 
 		return html`
-			<div class="media-section">
-				<h3>${title} <span class="count">(${movies.length})</span></h3>
-				<ul class="media-list">
-					${displayMovies.map(
-						(movie) => html`
-							<li class="media-item">
-								<div class="media-info">
-									<span class="media-title">${movie.title}</span>
-									${movie.year ? html`<span class="media-year">(${movie.year})</span>` : ""}
-								</div>
-								<div class="media-meta">
-									${this.renderRating(movie.rating)}
-									${this.renderStatusBadge(movie.status)}
-								</div>
-							</li>
-						`,
-					)}
-				</ul>
-				${
-					hasMore
-						? html`
-					<button
-						class="expand-btn"
-						@click=${this.toggleMoviesExpanded}
-					>
-						${this.moviesExpanded ? "Show less" : `Show all ${movies.length} items`}
-					</button>
-				`
-						: ""
-				}
+			<div class="filters">
+				${filters.map(
+					(f) => html`
+						<button
+							class=${classMap({ active: currentFilter === f.value })}
+							@click=${() => setFilter(f.value)}
+						>${f.label}</button>
+					`,
+				)}
 			</div>
 		`;
 	}
 
-	private renderBookSection(
-		title: string,
-		books: readonly Book[],
-		isCollapsible: boolean,
-	) {
-		if (books.length === 0) return "";
-		const sortedBooks = this.sortByRatingDesc(books);
-		const displayBooks =
-			isCollapsible && !this.booksExpanded
-				? sortedBooks.slice(0, this.COLLAPSED_LIMIT)
-				: sortedBooks;
-		const hasMore = isCollapsible && sortedBooks.length > this.COLLAPSED_LIMIT;
+	private renderMovieItem(movie: Movie) {
+		return html`
+			<li>
+				<span class="media-title">
+					${movie.title}
+					${movie.year ? html`<span class="dim">(${movie.year})</span>` : ""}
+				</span>
+				<span class="media-meta">
+					${this.renderRating(movie.rating)}
+					${this.renderStatus(movie.status)}
+				</span>
+			</li>
+		`;
+	}
+
+	private renderBookItem(book: Book) {
+		return html`
+			<li>
+				<span class="media-title">
+					${book.title}
+					<span class="dim">— ${book.author}</span>
+				</span>
+				<span class="media-meta">
+					${this.renderRating(book.rating)}
+					${this.renderStatus(book.status)}
+				</span>
+			</li>
+		`;
+	}
+
+	private renderContent() {
+		const isMovies = this.activeTab === "movies";
+		const filter = isMovies ? this.movieFilter : this.bookFilter;
+		const filtered = isMovies
+			? this.sortByRatingDesc(this.filterItems(MOVIES, filter))
+			: this.sortByRatingDesc(this.filterItems(BOOKS, filter));
+
+		if (filtered.length === 0) {
+			return html`<p class="dim">No items found.</p>`;
+		}
 
 		return html`
-			<div class="media-section">
-				<h3>${title} <span class="count">(${books.length})</span></h3>
-				<ul class="media-list">
-					${displayBooks.map(
-						(book) => html`
-							<li class="media-item">
-								<div class="media-info">
-									<span class="media-title">${book.title}</span>
-									<span class="media-author">by ${book.author}</span>
-								</div>
-								<div class="media-meta">
-									${this.renderRating(book.rating)}
-									${this.renderStatusBadge(book.status)}
-								</div>
-							</li>
-						`,
-					)}
-				</ul>
+			<ul class="media-list">
 				${
-					hasMore
-						? html`
-					<button
-						class="expand-btn"
-						@click=${this.toggleBooksExpanded}
-					>
-						${this.booksExpanded ? "Show less" : `Show all ${books.length} items`}
-					</button>
-				`
-						: ""
+					isMovies
+						? (filtered as Movie[]).map((item) => this.renderMovieItem(item))
+						: (filtered as Book[]).map((item) => this.renderBookItem(item))
 				}
-			</div>
-		`;
-	}
-
-	private renderMovies() {
-		const watched = this.movies.filter((m) => m.status === "watched");
-		const watching = this.movies.filter((m) => m.status === "watching");
-		const watchlist = this.movies.filter((m) => m.status === "watchlist");
-
-		return html`
-			<section class="watchlist-category" aria-labelledby="movies-heading">
-				<h2 id="movies-heading">Movies & TV Shows</h2>
-				${this.renderMovieSection("Watched", watched, true)}
-				${this.renderMovieSection("Currently Watching", watching, false)}
-				${this.renderMovieSection("Want to Watch", watchlist, false)}
-			</section>
-		`;
-	}
-
-	private renderBooks() {
-		const read = this.books.filter((b) => b.status === "read");
-		const reading = this.books.filter((b) => b.status === "reading");
-		const toRead = this.books.filter((b) => b.status === "to-read");
-
-		return html`
-			<section class="watchlist-category" aria-labelledby="books-heading">
-				<h2 id="books-heading">Books</h2>
-				${this.renderBookSection("Read", read, true)}
-				${this.renderBookSection("Currently Reading", reading, false)}
-				${this.renderBookSection("Want to Read", toRead, false)}
-			</section>
+			</ul>
 		`;
 	}
 
 	render() {
 		return html`
 			<div class="page">
-				<div class="container">
-					<h1>Library</h1>
-					<p class="intro">
-						A non-exhaustive list of movies I've watched and books I've read,
-						plus what's on my radar. Not updated daily, just a general snapshot.
-					</p>
-					<p class="recommend-cta">
-						Want to recommend me something? <a href="mailto:dominic+wwwrec@sdko.org">Send me a recommendation</a>
-					</p>
-					${this.renderMovies()}
-					${this.renderBooks()}
+				<h1>Library</h1>
+				<p class="dim">What I've watched and read.</p>
+
+				<div class="library-controls">
+					<div class="tabs">
+						<button
+							class=${classMap({ active: this.activeTab === "movies" })}
+							@click=${() => this.setTab("movies")}
+						>Movies & TV (${MOVIES.length})</button>
+						<button
+							class=${classMap({ active: this.activeTab === "books" })}
+							@click=${() => this.setTab("books")}
+						>Books (${BOOKS.length})</button>
+					</div>
+
+					<input
+						type="text"
+						class="search-input"
+						placeholder="Search..."
+						.value=${this.searchQuery}
+						@input=${this.handleSearch}
+					/>
+
+					${this.renderFilters()}
+					${this.renderStats()}
 				</div>
+
+				${this.renderContent()}
 			</div>
 		`;
 	}

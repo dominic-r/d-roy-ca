@@ -12,17 +12,21 @@ export class NavBar extends BaseComponent {
 
 	connectedCallback() {
 		super.connectedCallback();
-		window.addEventListener("popstate", this.handleNavigation);
+		window.addEventListener("popstate", this.handlePathChange);
 	}
 
 	disconnectedCallback() {
 		super.disconnectedCallback();
-		window.removeEventListener("popstate", this.handleNavigation);
+		window.removeEventListener("popstate", this.handlePathChange);
 	}
 
-	private handleNavigation = () => {
+	private handlePathChange = () => {
 		this.currentPath = window.location.pathname as RoutePath;
-		so.click({ button: "nav", path: this.currentPath });
+	};
+
+	private handleNavClick = (href: RoutePath) => {
+		this.currentPath = href;
+		so.click({ button: "nav", path: href });
 	};
 
 	private isActive(href: RoutePath): boolean {
@@ -31,18 +35,16 @@ export class NavBar extends BaseComponent {
 
 	render() {
 		return html`
-			<nav class="navbar" role="navigation" aria-label="Main navigation">
-				<div class="nav-container">
-					<a href="${BASE_PATH}/" class="nav-brand">d-roy.ca</a>
-					<div class="nav-links" role="menubar">
+			<nav>
+				<div class="nav-inner">
+					<a href="${BASE_PATH}/" class="nav-brand" @click=${() => this.handleNavClick(`${BASE_PATH}/` as RoutePath)}>d-roy.ca</a>
+					<div class="nav-links">
 						${NAV_LINKS.map(
 							(link) => html`
 								<a
 									href="${link.href}"
-									role="menuitem"
 									class=${classMap({ active: this.isActive(link.href) })}
-									aria-current=${this.isActive(link.href) ? "page" : "false"}
-									@click=${this.handleNavigation}
+									@click=${() => this.handleNavClick(link.href)}
 								>${link.label}</a>
 							`,
 						)}

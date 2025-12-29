@@ -1,524 +1,97 @@
-@use "variables" as *;
-@use "mixins" as *;
-
-// Reset and base styles
-*,
-*::before,
-*::after {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
 body {
-	background: $bg-primary;
-	color: $text-primary;
-	font-family: $font-mono;
-	font-size: 16px;
-	line-height: 1.6;
-	min-height: 100vh;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-// Accessibility: Reduce motion for users who prefer it
-@media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-	}
-}
-
-// Typography
-h1 {
-	font-size: 2.5rem;
-	font-weight: 700;
-	color: $text-primary;
-	margin-bottom: $spacing-md;
-
-	@include mobile {
-		font-size: 2rem;
-	}
-}
-
-h2 {
-	font-size: 1.5rem;
-	font-weight: 600;
-	color: $text-primary;
-	margin-bottom: $spacing-md;
-}
-
-h3 {
-	font-size: 1.25rem;
-	font-weight: 600;
-	margin-bottom: $spacing-xs;
-}
-
-a {
-	color: $accent;
-	text-decoration: none;
-	transition: color $duration-fast ease;
-
-	@include focus-visible;
-
-	&:hover {
-		color: $accent-hover;
-	}
-}
-
-// Layout
-.app-container {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-}
-
-.page {
-	flex: 1;
-	padding: 5rem $spacing-lg $spacing-xl;
-	animation: fadeIn $duration-normal ease-in-out;
-
-	@include mobile {
-		padding: 4rem $spacing-md $spacing-lg;
-	}
-}
-
-.container {
-	max-width: 900px;
+	font-family: monospace;
+	max-width: 600px;
 	margin: 0 auto;
+	padding: 60px 16px 16px;
 }
 
-// Page transition animation
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translateY(10px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
+a { color: blue; }
+a:visited { color: purple; }
 
-// Navigation bar
-.navbar {
+nav {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
-	background: rgba($bg-primary, 0.95);
-	backdrop-filter: blur(10px);
-	border-bottom: 1px solid $border-color;
-	padding: $spacing-md $spacing-lg;
-	z-index: 1000;
-
-	.nav-container {
-		max-width: 1200px;
-		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.nav-brand {
-		font-size: 1.125rem;
-		font-weight: 600;
-		color: $text-primary;
-
-		&:hover {
-			color: $accent;
-		}
-	}
-
-	.nav-links {
-		display: flex;
-		gap: $spacing-lg;
-
-		a {
-			font-size: 0.95rem;
-			color: $text-secondary;
-			transition: color $duration-fast ease;
-
-			&:hover,
-			&.active {
-				color: $accent;
-			}
-		}
-
-		@include mobile {
-			gap: $spacing-md;
-		}
-	}
+	background: white;
+	padding: 8px 16px;
+	border-bottom: 1px solid #ccc;
 }
 
-// Landing page
+.nav-inner {
+	max-width: 600px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.nav-brand { font-weight: bold; color: black; }
+.nav-brand:visited { color: black; }
+
+.nav-links { display: flex; gap: 16px; }
+.nav-links a.active { font-weight: bold; }
+
+footer {
+	margin-top: 32px;
+	padding-top: 16px;
+	border-top: 1px solid #ccc;
+	text-align: center;
+	font-size: 12px;
+}
+
+.footer-links { margin-bottom: 8px; }
+.footer-links a { margin: 0 8px; }
+
 .landing {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	padding: 5rem $spacing-lg $spacing-lg;
 	text-align: center;
-	animation: fadeIn $duration-normal ease-in-out;
-
-	.landing-content {
-		max-width: 700px;
-	}
-
-	h1 {
-		font-size: 3.5rem;
-		font-weight: 700;
-		margin-bottom: $spacing-md;
-
-		@include mobile {
-			font-size: 2.5rem;
-		}
-	}
-
-	.tagline {
-		font-size: 1.25rem;
-		color: $text-secondary;
-		margin-bottom: $spacing-xl;
-
-		@include mobile {
-			font-size: 1rem;
-		}
-	}
-
-	.cta-button {
-		display: inline-block;
-		padding: 0.875rem $spacing-lg;
-		background: $accent;
-		color: $bg-primary;
-		font-weight: 600;
-		border-radius: $radius-md;
-		transition: all $duration-fast ease;
-		box-shadow: 0 2px 8px rgba($accent, 0.2);
-
-		@include focus-visible;
-
-		&:hover {
-			background: $accent-hover;
-			color: $bg-primary;
-			transform: translateY(-2px);
-			box-shadow: 0 4px 12px rgba($accent, 0.4);
-		}
-	}
+	padding: 100px 0;
 }
 
-// Card component
-.card {
-	background: $bg-secondary;
-	padding: $spacing-lg;
-	border-radius: $radius-lg;
-	border: 1px solid $border-color;
-	margin-bottom: $spacing-lg;
+.dim { color: #666; }
 
-	@include card-hover;
-
-	h2 {
-		color: $accent;
-	}
-}
-
-// Work items & Project items (shared pattern)
-.work-item,
-.project-item {
-	@include list-item-separator;
-
-	h3 {
-		color: $text-primary;
-	}
-}
-
-.project-item {
-	margin-bottom: $spacing-xl;
-}
-
-.project-links {
-	display: flex;
-	gap: $spacing-md;
-	margin-top: $spacing-sm;
-}
-
-// Skills
-.skills {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.75rem;
-}
-
-.skill-tag {
-	background: $bg-primary;
-	color: $accent;
-	padding: $spacing-xs $spacing-sm;
-	border-radius: $radius-sm;
-	border: 1px solid $border-color;
-	font-size: 0.875rem;
-	transition: all $duration-fast ease;
-
-	&:hover {
-		border-color: $accent;
-		transform: translateY(-1px);
-	}
-}
-
-// Contact links
-.contact-links {
-	display: flex;
-	gap: $spacing-md;
-	flex-wrap: wrap;
-}
-
-// Footer
-.footer {
-	background: $bg-secondary;
-	border-top: 1px solid $border-color;
-	padding: $spacing-lg;
-	text-align: center;
-	color: $text-secondary;
-	font-size: 0.875rem;
-
-	.heart::before {
-		content: "❤️";
-	}
-
-	a {
-		color: $accent;
-
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-}
-
-// authentik page styles
-.work-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: $spacing-md;
-	margin-bottom: $spacing-xl;
-
-	.authentik-logo {
-		height: 60px;
-		width: auto;
-		max-width: 200px;
-	}
-
-	h1 {
-		margin: 0 0 $spacing-xs;
-		font-size: 2.5rem;
-	}
-
-	.authentik-link {
-		font-size: 0.95rem;
-		color: $text-secondary;
-
-		&:hover {
-			color: $accent;
-		}
-	}
-}
-
-.intro {
-	font-size: 1.125rem;
-	line-height: 1.8;
-	margin-bottom: $spacing-xl;
-	color: $text-secondary;
-}
-
-.contributions {
-	h2 {
-		color: $accent;
-		margin-bottom: $spacing-lg;
-	}
-
-	ul {
-		list-style: none;
-		padding: 0;
-
-		li {
-			position: relative;
-			padding-left: $spacing-lg;
-			margin-bottom: $spacing-md;
-			line-height: 1.7;
-			color: $text-secondary;
-
-			&::before {
-				content: "•";
-				position: absolute;
-				left: 0;
-				color: $accent;
-				font-weight: bold;
-			}
-		}
-	}
-}
-
-.wip-badge {
-	display: inline-block;
-	margin-left: $spacing-xs;
-	padding: 0.25rem $spacing-xs;
-	background: rgba($accent, 0.1);
-	color: $accent;
-	font-size: 0.75rem;
-	border-radius: $radius-sm;
-	border: 1px solid rgba($accent, 0.3);
-	font-weight: 500;
-}
-
-// Watchlist page styles
-.recommend-cta {
-	color: $text-secondary;
-	font-size: 0.95rem;
-	margin-bottom: $spacing-xl;
-}
-
-.watchlist-category {
-	margin-bottom: $spacing-xl;
-
-	h2 {
-		color: $accent;
-		margin-bottom: $spacing-lg;
-		padding-bottom: $spacing-sm;
-		border-bottom: 1px solid $border-color;
-	}
-}
-
-.media-section {
-	margin-bottom: $spacing-lg;
-
-	h3 {
-		color: $text-primary;
-		font-size: 1.1rem;
-		margin-bottom: $spacing-sm;
-
-		.count {
-			color: $text-secondary;
-			font-weight: 400;
-			font-size: 0.9rem;
-		}
-	}
-}
-
-.expand-btn {
-	background: transparent;
-	border: 1px solid $border-color;
-	color: $accent;
-	padding: $spacing-xs $spacing-sm;
-	border-radius: $radius-sm;
+// Library
+.tabs { margin-bottom: 16px; }
+.tabs button {
 	font-family: inherit;
-	font-size: 0.85rem;
+	font-size: inherit;
 	cursor: pointer;
-	margin-top: $spacing-sm;
-	transition: all $duration-fast ease;
+	margin-right: 8px;
+}
+.tabs button.active { font-weight: bold; }
 
-	&:hover {
-		background: rgba($accent, 0.1);
-		border-color: $accent;
-	}
-
-	@include focus-visible;
+.search-input {
+	width: 100%;
+	padding: 4px;
+	font-family: inherit;
+	margin-bottom: 16px;
+	box-sizing: border-box;
 }
 
-.media-list {
-	list-style: none;
-	padding: 0;
+.filters { margin-bottom: 16px; }
+.filters button {
+	font-family: inherit;
+	font-size: 12px;
+	cursor: pointer;
+	margin-right: 4px;
 }
+.filters button.active { font-weight: bold; }
 
-.media-item {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	gap: $spacing-sm;
-	padding: $spacing-sm 0;
-	border-bottom: 1px solid rgba($border-color, 0.5);
+.stats { font-size: 12px; color: #666; margin-bottom: 16px; }
 
-	&:last-child {
-		border-bottom: none;
-	}
-
-	@include mobile {
-		flex-direction: column;
-		gap: $spacing-xs;
-	}
+.media-list { list-style: none; padding: 0; margin: 0; }
+.media-list li {
+	padding: 4px 0;
+	border-bottom: 1px solid #eee;
 }
+.media-list li:last-child { border-bottom: none; }
 
-.media-info {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: baseline;
-	gap: $spacing-xs;
+.media-meta { font-size: 12px; color: #666; }
+.rating { color: orange; }
+
+// authentik
+.authentik-logo {
+	height: 1em;
+	vertical-align: middle;
+	margin-left: 8px;
 }
-
-.media-title {
-	color: $text-primary;
-	font-weight: 500;
-}
-
-.media-year {
-	color: $text-secondary;
-	font-size: 0.875rem;
-}
-
-.media-author {
-	color: $text-secondary;
-	font-size: 0.875rem;
-}
-
-.media-meta {
-	display: flex;
-	align-items: center;
-	gap: $spacing-sm;
-	flex-shrink: 0;
-}
-
-.rating {
-	color: #fbbf24;
-	font-size: 0.875rem;
-	letter-spacing: -1px;
-}
-
-.status-badge {
-	display: inline-block;
-	padding: 0.2rem $spacing-xs;
-	font-size: 0.7rem;
-	border-radius: $radius-sm;
-	font-weight: 500;
-	text-transform: lowercase;
-
-	&.status-watched,
-	&.status-read {
-		background: rgba(34, 197, 94, 0.15);
-		color: #22c55e;
-		border: 1px solid rgba(34, 197, 94, 0.3);
-	}
-
-	&.status-watching,
-	&.status-reading {
-		background: rgba($accent, 0.15);
-		color: $accent;
-		border: 1px solid rgba($accent, 0.3);
-	}
-
-	&.status-watchlist,
-	&.status-to-read {
-		background: rgba($text-secondary, 0.1);
-		color: $text-secondary;
-		border: 1px solid rgba($text-secondary, 0.3);
-	}
-}
-
-// Utilities
-.text-secondary {
-	color: $text-secondary;
-}
-
-.mb-2 {
-	margin-bottom: $spacing-xs;
-}
+.wip { color: orange; font-size: 12px; }

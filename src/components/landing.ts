@@ -7,9 +7,9 @@ export class LandingPage extends BaseComponent {
 	render() {
 		return html`
 			<div class="landing">
-				<div class="landing-content">
+				<div>
 					<h1>Coming Soon</h1>
-					<p class="tagline">Under construction</p>
+					<p class="dim">Under construction</p>
 				</div>
 			</div>
 		`;

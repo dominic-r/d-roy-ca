@@ -1,13 +1,39 @@
 import "urlpattern-polyfill";
-import { SO } from "#so";
 import "#types";
 import "#console";
 
 declare const __APP_VERSION__: string;
 
-export const so = new SO("d-roy-ca", __APP_VERSION__);
+// Lazy-load SO
+let _so: import("#so").SO | null = null;
+
+const getSO = async () => {
+	if (!_so) {
+		const { SO } = await import("#so");
+		_so = new SO("d-roy-ca", __APP_VERSION__);
+	}
+	return _so;
+};
+
+// Proxy object for sync access
+export const so = {
+	pageview: (props?: Record<string, string>) => {
+		getSO().then((s) => s.pageview(props));
+	},
+	click: (props?: Record<string, string>) => {
+		getSO().then((s) => s.click(props));
+	},
+	search: (props?: Record<string, string>) => {
+		getSO().then((s) => s.search(props));
+	},
+	track: (type: string, props?: Record<string, string>) => {
+		getSO().then((s) => s.track(type, props));
+	},
+};
+
 so.pageview();
 window.addEventListener("popstate", () => so.pageview());
+
 import "#components/navbar";
 import "#components/footer";
 import "#components/landing";

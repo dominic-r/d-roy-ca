@@ -1,14 +1,13 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
 		"paths": {
-			"#components/*": ["src/components/*"],
-			"#constants/*": ["src/constants/*"],
-			"#console": ["src/console/index.ts"],
-			"#console/*": ["src/console/*"],
-			"#so": ["src/so/index.ts"],
-			"#so/*": ["src/so/*"],
-			"#types": ["src/types/index.ts"]
+			"#components/*": ["./src/components/*"],
+			"#constants/*": ["./src/constants/*"],
+			"#console": ["./src/console/index.ts"],
+			"#console/*": ["./src/console/*"],
+			"#so": ["./src/so/index.ts"],
+			"#so/*": ["./src/so/*"],
+			"#types": ["./src/types/index.ts"]
 		},
 		"target": "ES2022",
 		"experimentalDecorators": true,

@@ -91,10 +91,15 @@ export const MOVIES: readonly Movie[] = [
 	{ title: "John Wick: Chapter 3", year: 2019, status: "watched", rating: 4 },
 	{ title: "John Wick: Chapter 4", year: 2023, status: "watched", rating: 4 },
 	{ title: "The Killer", year: 2023, status: "watched", rating: 4 },
-	{ title: "Sicario", year: 2015, status: "watchlist" },
-	{ title: "Sicario: Day of the Soldado", year: 2018, status: "watchlist" },
+	{ title: "Sicario", year: 2015, status: "watched", rating: 5 },
+	{
+		title: "Sicario: Day of the Soldado",
+		year: 2018,
+		status: "watched",
+		rating: 5,
+	},
 	{ title: "Zero Dark Thirty", year: 2012, status: "watchlist" },
-	{ title: "A Bronx Tale", year: 1993, status: "watchlist" },
+	{ title: "A Bronx Tale", year: 1993, status: "watched", rating: 5 },
 	{ title: "The Hunger Games", year: 2012, status: "watched", rating: 5 },
 	{
 		title: "The Hunger Games: Catching Fire",
@@ -199,7 +204,14 @@ export const MOVIES: readonly Movie[] = [
 	{ title: "Dune", year: 2021, status: "watched", rating: 4 },
 	{ title: "Dune: Part Two", year: 2024, status: "watched", rating: 4 },
 	{ title: "A House of Dynamite", year: 2025, status: "watched", rating: 5 },
+	{ title: "F1", year: 2025, status: "watched", rating: 5 },
 	{ title: "Narcos", year: 2015, status: "watching" },
+	{ title: "Victoria and Abdul", year: 2017, status: "watchlist" },
+	{ title: "1984", year: 1984, status: "watched", rating: 5 },
+	{ title: "Family Plan 2", year: 2025, status: "watched", rating: 5 },
+	{ title: "Shooter", year: 2007, status: "watchlist" },
+	{ title: "The Godfather", year: 1972, status: "watched", rating: 4 },
+	{ title: "The Godfather Part II", year: 1974, status: "watched", rating: 4 },
 ] as const;
 
 export const BOOKS: readonly Book[] = [
@@ -270,7 +282,7 @@ export const BOOKS: readonly Book[] = [
 		author: "Ernesto Che Guevara",
 		status: "to-read",
 	},
-	{ title: "1984", author: "George Orwell", status: "to-read" },
+	{ title: "1984", author: "George Orwell", status: "read", rating: 5 },
 	{ title: "Bad Company", author: "Jack Higgins", status: "read", rating: 4 },
 	{
 		title: "What They Don't Teach You at Harvard Business School",
@@ -330,4 +342,9 @@ export const BOOKS: readonly Book[] = [
 	},
 	{ title: "Fahrenheit 451", author: "Ray Bradbury", status: "to-read" },
 	{ title: "On Bullshit", author: "Harry G. Frankfurt", status: "to-read" },
+	{
+		title: "Reluctant Spy: My Secret Life in the CIA's War on Terror",
+		author: "John Kiriakou",
+		status: "to-read",
+	},
 ] as const;
