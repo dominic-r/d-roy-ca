@@ -212,6 +212,9 @@ export const MOVIES: readonly Movie[] = [
 	{ title: "Shooter", year: 2007, status: "watchlist" },
 	{ title: "The Godfather", year: 1972, status: "watched", rating: 4 },
 	{ title: "The Godfather Part II", year: 1974, status: "watched", rating: 4 },
+	{ title: "School of Rock", year: 2003, status: "watched", rating: 5 },
+	{ title: "The Recruit", year: 2022, status: "watched", rating: 5 },
+	{ title: "Coming to America", year: 1988, status: "watched", rating: 5 },
 ] as const;
 
 export const BOOKS: readonly Book[] = [
@@ -345,6 +348,11 @@ export const BOOKS: readonly Book[] = [
 	{
 		title: "Reluctant Spy: My Secret Life in the CIA's War on Terror",
 		author: "John Kiriakou",
+		status: "to-read",
+	},
+	{
+		title: "Guantánamo Diary",
+		author: "Mohamedou Ould Slahi",
 		status: "to-read",
 	},
 ] as const;
