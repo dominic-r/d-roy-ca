@@ -14,7 +14,7 @@ export class AppFooter extends BaseComponent {
 					<a href="mailto:dominic@sdko.org">Email</a>
 				</div>
 				<div>
-					Made with ❤️ in Canada · © ${this.currentYear} Dominic Roy · v${__APP_VERSION__}
+					Made with ❤️ in Canada &middot; ${this.currentYear} Dominic Roy &middot; v${__APP_VERSION__}
 				</div>
 			</footer>
 		`;

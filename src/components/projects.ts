@@ -7,7 +7,9 @@ export class ProjectsPage extends BaseComponent {
 	render() {
 		return html`
 			<div class="page">
-				<h1>Projects</h1>
+				<div class="section-header">
+					<h1>Projects</h1>
+				</div>
 				<p class="dim">Coming soon...</p>
 			</div>
 		`;

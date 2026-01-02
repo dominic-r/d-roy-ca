@@ -5,3 +5,21 @@
 		@content;
 	}
 }
+
+@mixin tablet {
+	@media (min-width: $mobile) and (max-width: $tablet) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: $tablet) {
+		@content;
+	}
+}
+
+@mixin screen($size) {
+	@media (min-width: $size) {
+		@content;
+	}
+}

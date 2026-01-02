@@ -187,35 +187,47 @@ export class LibraryPage extends BaseComponent {
 
 	render() {
 		return html`
-			<div class="page">
-				<h1>Library</h1>
-				<p class="dim">What I've watched and read.</p>
+			<div class="page library-page">
+				<header class="page-header">
+					<h1 class="page-header__title">Library</h1>
+					<p class="page-header__subtitle">A non-exhaustive list of what I've watched and read.</p>
+				</header>
 
-				<div class="library-controls">
-					<div class="tabs">
-						<button
-							class=${classMap({ active: this.activeTab === "movies" })}
-							@click=${() => this.setTab("movies")}
-						>Movies & TV (${MOVIES.length})</button>
-						<button
-							class=${classMap({ active: this.activeTab === "books" })}
-							@click=${() => this.setTab("books")}
-						>Books (${BOOKS.length})</button>
-					</div>
+				<div class="library-layout">
+					<aside class="library-sidebar">
+						<div class="library-tabs">
+							<button
+								class=${classMap({ active: this.activeTab === "movies" })}
+								@click=${() => this.setTab("movies")}
+							>
+								<span class="library-tabs__label">Movies & TV</span>
+								<span class="library-tabs__count">${MOVIES.length}</span>
+							</button>
+							<button
+								class=${classMap({ active: this.activeTab === "books" })}
+								@click=${() => this.setTab("books")}
+							>
+								<span class="library-tabs__label">Books</span>
+								<span class="library-tabs__count">${BOOKS.length}</span>
+							</button>
+						</div>
 
-					<input
-						type="text"
-						class="search-input"
-						placeholder="Search..."
-						.value=${this.searchQuery}
-						@input=${this.handleSearch}
-					/>
+						<input
+							type="text"
+							class="search-input"
+							placeholder="Search..."
+							.value=${this.searchQuery}
+							@input=${this.handleSearch}
+						/>
 
-					${this.renderFilters()}
-					${this.renderStats()}
+						${this.renderFilters()}
+					</aside>
+
+					<main class="library-content">
+						${this.renderStats()}
+						${this.renderContent()}
+					</main>
 				</div>
-
-				${this.renderContent()}
 			</div>
 		`;
 	}

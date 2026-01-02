@@ -1,18 +1,26 @@
 // Colors
-$bg: #0a0a0a;
-$text: #e5e5e5;
-$text-dim: #888;
-$accent: #6af;
-$border: #333;
+$color-bg: #fafafa;
+$color-text: #2a2722;
+$color-text-mid: #666;
+$color-border: #eee;
+$color-border-mid: #bdbdbd;
+$color-accent: #e6a027;
+$color-authentik: #fd4b2d;
 
 // Typography
-$font:
-	"JetBrains Mono",
-	"Fira Code",
-	monospace;
+$font-sans: 'Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-serif-display: 'Louize Display', Georgia, serif;
 
 // Spacing
 $gap: 1rem;
 
-// Breakpoint
+// Breakpoints
 $mobile: 600px;
+$tablet: 900px;
+$desktop: 1100px;
+
+// Border radius
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 0.75rem;
+$radius-full: 9999px;
