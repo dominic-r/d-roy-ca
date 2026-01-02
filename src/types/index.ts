@@ -5,6 +5,7 @@ import type { LandingPage } from "#components/landing";
 import type { LibraryPage } from "#components/library";
 import type { NavBar } from "#components/navbar";
 import type { ProjectsPage } from "#components/projects";
+import type { RockPage } from "#components/rock";
 import type { AppRoot } from "../app";
 
 declare global {
@@ -17,6 +18,7 @@ declare global {
 		"projects-page": ProjectsPage;
 		"authentik-page": AuthentikPage;
 		"library-page": LibraryPage;
+		"rock-page": RockPage;
 	}
 
 	const __APP_VERSION__: string;

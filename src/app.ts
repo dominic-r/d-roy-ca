@@ -41,6 +41,8 @@ import "#components/about";
 import "#components/projects";
 import "#components/authentik";
 import "#components/library";
+import "#components/rock";
+import "#components/quebec";
 import { Router } from "@lit-labs/router";
 import { html } from "lit";
 import { customElement } from "lit/decorators.js";

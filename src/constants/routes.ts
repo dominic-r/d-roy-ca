@@ -34,6 +34,18 @@ const ROUTE_CONFIG = [
 		label: "Library",
 		render: () => html`<library-page></library-page>`,
 	},
+	{
+		key: "ROCK",
+		path: "/rock",
+		label: "Rock",
+		render: () => html`<rock-page></rock-page>`,
+	},
+	{
+		key: "QUEBEC",
+		path: "/quebec",
+		label: "Quebec",
+		render: () => html`<quebec-page></quebec-page>`,
+	},
 ] as const;
 
 export const ROUTES = Object.fromEntries(
@@ -42,7 +54,12 @@ export const ROUTES = Object.fromEntries(
 
 export type RoutePath = (typeof ROUTES)[keyof typeof ROUTES];
 
-export const NAV_LINKS = ROUTE_CONFIG.map((r) => ({
+// Pages excluded from main navigation
+const HIDDEN_PAGES = ["ROCK", "QUEBEC"] as const;
+
+export const NAV_LINKS = ROUTE_CONFIG.filter(
+	(r) => !HIDDEN_PAGES.includes(r.key as (typeof HIDDEN_PAGES)[number]),
+).map((r) => ({
 	label: r.label,
 	href: `${BASE_PATH}${r.path}` as RoutePath,
 }));
