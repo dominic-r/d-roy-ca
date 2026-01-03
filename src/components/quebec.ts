@@ -72,8 +72,12 @@ export class QuebecPage extends BaseComponent {
 
 				<section class="quebec-quote">
 					<blockquote>
-						<p>"Le Québec a tous les attributs d'une nation. Il ne lui manque que la souveraineté."</p>
-						<cite>— René Lévesque</cite>
+						<p>"Le Québec a tous les attributs d'une nation. Il ne lui manque que la souveraineté. Un peuple, une nation, un pays doit avoir un gouvernement, un vrai."</p>
+						<cite>
+							<span class="quebec-quote__author">Jacques Parizeau</span>
+							<span class="quebec-quote__source">Pour un Québec souverain</span>
+							<span class="quebec-quote__year">1997</span>
+						</cite>
 					</blockquote>
 				</section>
 

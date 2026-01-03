@@ -1562,11 +1562,37 @@ $color-quebec-blue: #003DA5;
 		}
 
 		cite {
+			display: flex;
+			justify-content: center;
+			align-items: baseline;
+			gap: 0.5rem;
 			font-size: 0.875rem;
 			font-style: normal;
-			text-transform: uppercase;
 			letter-spacing: 0.02em;
 			color: $color-text-mid;
+		}
+	}
+
+	&__author {
+		text-transform: uppercase;
+	}
+
+	&__source {
+		font-style: italic;
+
+		&::before {
+			content: "—";
+			margin-right: 0.5rem;
+		}
+	}
+
+	&__year {
+		&::before {
+			content: "(";
+		}
+
+		&::after {
+			content: ")";
 		}
 	}
 }
