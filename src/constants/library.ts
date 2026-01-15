@@ -215,6 +215,15 @@ export const MOVIES: readonly Movie[] = [
 	{ title: "School of Rock", year: 2003, status: "watched", rating: 5 },
 	{ title: "The Recruit", year: 2022, status: "watched", rating: 5 },
 	{ title: "Coming to America", year: 1988, status: "watched", rating: 5 },
+	{ title: "Central Intelligence", year: 2016, status: "watched", rating: 5 },
+	{ title: "Relay", year: 2024, status: "watched", rating: 5 },
+	{
+		title: "American Manhunt: Osama bin Laden",
+		year: 2025,
+		status: "watched",
+		rating: 4,
+	},
+	{ title: "Superstore", year: 2015, status: "watched", rating: 4 },
 ] as const;
 
 export const BOOKS: readonly Book[] = [
@@ -277,7 +286,12 @@ export const BOOKS: readonly Book[] = [
 		rating: 3,
 	},
 	{ title: "The Art of War", author: "Sun Tzu", status: "read", rating: 4 },
-	{ title: "To Kill a Mockingbird", author: "Harper Lee", status: "reading" },
+	{
+		title: "To Kill a Mockingbird",
+		author: "Harper Lee",
+		status: "read",
+		rating: 5,
+	},
 	{ title: "Ghost Wars", author: "Steve Coll", status: "to-read" },
 	{ title: "Diplomacy", author: "Henry Kissinger", status: "to-read" },
 	{
@@ -353,6 +367,22 @@ export const BOOKS: readonly Book[] = [
 	{
 		title: "Guantánamo Diary",
 		author: "Mohamedou Ould Slahi",
+		status: "to-read",
+	},
+	{ title: "Les Misérables", author: "Victor Hugo", status: "read", rating: 5 },
+	{
+		title: "Le Soleil des Scorta",
+		author: "Laurent Gaudé",
+		status: "reading",
+	},
+	{
+		title: "The Campaigns of Alexander",
+		author: "Arrian",
+		status: "to-read",
+	},
+	{
+		title: "La Fin de l'histoire et le Dernier Homme",
+		author: "Francis Fukuyama",
 		status: "to-read",
 	},
 ] as const;
